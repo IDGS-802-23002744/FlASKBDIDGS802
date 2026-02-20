@@ -13,18 +13,63 @@ app.config.from_object(DevelopmentConfig)
 db.init_app(app)
 csrf=CSRFProtect()
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 @app.route("/index")
 def index():
-	return render_template("index.html")
+    create_form = forms.UserForm2(request.form)
+    alumno = Alumnos.query.all()
+    return render_template("index.html", form=create_form, alumno=alumno)
 
 @app.errorhandler(404)
 def page_not_fount(e):
 	return render_template("404.html")
 
-@app.route("/alumnos")
+@app.route("/alumnos", methods=['GET', 'POST'])
 def alumnos():
-	return render_template("alumnos.html")
+	create_from=forms.UserForm2(request.form)
+	if request.method=='POST':
+		alum=Alumnos(nombre=create_from.nombre.data,
+					apaterno=create_from.apaterno.data,
+					email=create_from.email.data)
+		db.session.add(alum)
+		db.session.commit()
+		return redirect(url_for('index'))
+	return render_template("alumnos.html", form=create_from)
+
+@app.route("/modificar", methods=['GET', 'POST'])
+def alumnos():
+	create_from=forms.UserForm2(request.form)
+	if request.method=='GET':
+		id=request.args.get('id')
+		alum1=db.session.query(Alumnos).filter(Alumnos.id==id).first()
+		create_from.id.data=request.args.get('id')
+		create_from.nombre.data=alum1.nombre
+		create_from.apaterno.data=alum1.apaterno
+		create_from.email.data=alum1.email
+	if request.method=='POST':
+		id=create_from.id.data
+		alum1=db.session.query(Alumnos).filter(Alumnos.id==id).first()
+		alum1.id=id
+		alum1.nombre=str.rstrip(create_from.nombre.data)
+		alum1.apaterno=create_from.apaterno.data
+		alum1.email=create_from.email.data
+		db.session.add(alum1)
+		db.session.commit()
+		return redirect(url_for('index'))
+	return render_template("alumnos.html", form=create_from)
+
+@app.route("/detalles", methods=['GET', 'POST'])
+def alumnos():
+	create_from=forms.UserForm2(request.form)
+	if request.method=='GET':
+		id=request.args.get('id')
+		alum1=db.session.query(Alumnos).filter(Alumnos.id==id).first()
+		id=request.args.get('id')
+		nombre=alum1.nombre
+		apaterno=alum1.apaterno
+		email=alum1.email
+
+	return render_template("detalles.html", nombre=nombre, apaterno=apaterno, email=email)
 
 
 if __name__ == '__main__':

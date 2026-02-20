@@ -4,54 +4,87 @@
 
 {% import "_macros.html" as macros %}
 
-
-<form class="max-w-sm mx-auto">
-<div class="grid gap-6 mb-6 md:grid-cols-2">
-        <div>
-            <label for="first_name" class="block mb-2.5 text-sm font-medium text-heading">First name</label>
-            <input type="text" id="first_name" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" placeholder="John" required />
-        </div>
-        <div>
-            <label for="last_name" class="block mb-2.5 text-sm font-medium text-heading">Last name</label>
-            <input type="text" id="last_name" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" placeholder="Doe" required />
-        </div>
-        <div>
-            <label for="company" class="block mb-2.5 text-sm font-medium text-heading">Company</label>
-            <input type="text" id="company" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" placeholder="Flowbite" required />
-        </div>  
-        <div>
-            <label for="phone" class="block mb-2.5 text-sm font-medium text-heading">Phone number</label>
-            <input type="tel" id="phone" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" placeholder="123-45-678" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required />
-        </div>
-        <div>
-            <label for="website" class="block mb-2.5 text-sm font-medium text-heading">Website URL</label>
-            <input type="url" id="website" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" placeholder="flowbite.com" required />
-        </div>
-        <div>
-            <label for="visitors" class="block mb-2.5 text-sm font-medium text-heading">Unique visitors (per month)</label>
-            <input type="number" id="visitors" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" placeholder="" required />
-        </div>
-    </div>
-    <div class="mb-6">
-        <label for="email" class="block mb-2.5 text-sm font-medium text-heading">Email address</label>
-        <input type="email" id="email" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" placeholder="john.doe@company.com" required />
-    </div> 
-    <div class="mb-6">
-        <label for="password" class="block mb-2.5 text-sm font-medium text-heading">Password</label>
-        <input type="password" id="password" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" placeholder="•••••••••" required />
-    </div> 
-    <div class="mb-6">
-        <label for="confirm_password" class="block mb-2.5 text-sm font-medium text-heading">Confirm password</label>
-        <input type="password" id="confirm_password" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" placeholder="•••••••••" required />
-    </div> 
-    <div class="flex items-start mb-6">
-        <div class="flex items-center h-5">
-        <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-default-medium rounded-xs bg-neutral-secondary-medium focus:ring-2 focus:ring-brand-soft" required />
-        </div>
-        <label for="remember" class="ms-2 text-sm font-medium text-heading">I agree with the <a href="#" class="text-fg-brand hover:underline">terms and conditions</a>.</label>
-    </div>
-    <button type="submit" class="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Submit</button>
-</form>
-
+<div style="margin-top: 50px;"
+    class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
+    <a
+        href="alumnos"
+        class>
+        <button type="button"
+            class="inline-flex items-center  text-white bg-brand hover:bg-brand-strong box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+            Nuevo
+            <span
+                class="inline-flex items-center justify-center w-4.5 h-4.5 ms-2 text-xs font-medium text-fg-brand-strong bg-brand-soft rounded-full dark:text-fg-brand-subtle">2</span>
+        </button>
+    </a>
+    <table class="w-full text-sm text-left rtl:text-right text-body">
+        <thead
+            class="text-sm text-body bg-neutral-secondary-soft border-b rounded-base border-default">
+            <tr>
+                <th scope="col" class="px-6 py-3 font-medium">
+                    Nombre
+                </th>
+                <th scope="col" class="px-6 py-3 font-medium">
+                    Apaterno
+                </th>
+                <th scope="col" class="px-6 py-3 font-medium">
+                    email
+                </th>
+                <th scope="col" class="px-6 py-3 font-medium">
+                    editar
+                </th>
+                <th scope="col" class="px-6 py-3 font-medium">
+                    detalle
+                </th>
+                <th scope="col" class="px-6 py-3 font-medium">
+                    eliminar
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for alum in alumno%}
+            <tr class="bg-neutral-primary border-b border-default">
+                <th scope="row"
+                    class="px-6 py-4 font-medium text-heading whitespace-nowrap">
+                    {{alum.nombre}}
+                </th>
+                <td class="px-6 py-4">
+                    {{alum.apaterno}}
+                </td>
+                <td class="px-6 py-4">
+                    {{alum.email}}
+                </td>
+                <td class="px-6 py-4">
+                    <button
+                        class="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-heading rounded-base group bg-gradient-to-br from-red-200 via-red-300 to-yellow-200 group-hover:from-red-200 group-hover:via-red-300 group-hover:to-yellow-200 dark:text-white dark:hover:text-heading focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400">
+                        <span
+                            class=" relative px-4 py-2.5 transition-all ease-in duration-75 bg-neutral-primary-soft rounded-base group-hover:bg-transparent group-hover:dark:bg-transparent leading-5">
+                            Red to Yellow
+                        </span>
+                    </button>
+                </td>
+                <td class="px-6 py-4">
+                    <a href="detalle">
+                    <button
+                        class="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-heading rounded-base group bg-gradient-to-br from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 dark:text-white dark:hover:text-heading focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-lime-800">
+                        <span
+                            class=" relative px-4 py-2.5 transition-all ease-in duration-75 bg-neutral-primary-soft rounded-base group-hover:bg-transparent group-hover:dark:bg-transparent leading-5">
+                            Destalles
+                        </span>
+                    </button></a>
+                </td>
+                <td class="px-6 py-4">
+                    <button
+                        class="relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-heading rounded-base group bg-gradient-to-br from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800">
+                        <span
+                            class=" relative px-4 py-2.5 transition-all ease-in duration-75 bg-neutral-primary-soft rounded-base group-hover:bg-transparent group-hover:dark:bg-transparent leading-5">
+                            Purple to pink
+                        </span>
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 
 {% endblock %}
